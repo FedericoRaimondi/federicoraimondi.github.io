@@ -6,7 +6,15 @@ April 2024, Stockholm
 ## Conference presentation
 Here is the video of the speech I gave on our MMM journey!
 
-<iframe src="https://drive.google.com/file/d/1_ipPNMut4uHTRCbsy-CLGOKwrw1OtxoW/preview" width="1000" height="600" allow="autoplay"></iframe>
+<style>
+  .responsive-iframe {
+    width: 80%;
+    height: 60vh; /* 100% of the viewport height */
+    border: none; /* Optional: Remove border */
+  }
+</style>
+
+<iframe class="responsive-iframe" src="https://drive.google.com/file/d/1_ipPNMut4uHTRCbsy-CLGOKwrw1OtxoW/preview" allow="autoplay"></iframe>
 
 ---
 

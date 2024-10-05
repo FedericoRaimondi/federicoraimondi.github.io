@@ -43,7 +43,3 @@ _sample_submission.csv_ - a sample submission file in the correct format.
 
 - [Exploratory Data Analysis](Exploratory_Data_Analysis)
 - [Predictive Analysis_& Model Tuning](PredictiveAnalysis_ModelTuning)
-
----
-
-[HomePage](../README.md)

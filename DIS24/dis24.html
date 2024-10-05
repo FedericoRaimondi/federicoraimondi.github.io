@@ -1,130 +1,403 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <style>
+        :root {
+            --navy-blue: #1d3956;
+            --dark-blue: #001f3f;
+            --light-grey: #f0f0f0;
+            --white: #ffffff;
+            --accent-blue: #5084c0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-grey);
+            color: var(--navy-blue);
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .nav {
+            width: 200px;
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 0px;
+            position: fixed;
+            height: 100%;
+            left: -200px;
+            transition: left 0.3s;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-<html>
-	<head>
-		<title>FRC's Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../assets/css/main.css" />
-		<link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
-	</head>
-	<body class="is-preload">
-
-		<!-- Header -->
-			<div id="header">
-
-				<div class="top">
-
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="../../images/frc_pic.JPG" alt="" /></span>
-							<h1 id="title">Federico <br />
-								Raimondi Cominesi</h1>
-							<p>Senior Data Scientist</p>
-						</div>
-
-					<!-- Nav -->
-						<nav id="nav">
-							<ul id="toc">
-								<li><a href="#top" id="top-link"><span class="icon solid fa-arrow-up">Back to top</span></a></li>
-							</ul>
-						</nav>
-
-				</div>
-
-				<div class="bottom">
-						<ul class="icons">
-							<li>Home Page<a href="../index.html" class="icon solid fa-home"></a></li>
-						</ul>	
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="https://github.com/FedericoRaimondi" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="https://www.kaggle.com/raimonds1993" class="icon brands fa-kaggle"><span class="label">Kaggle</span></a></li>
-							<li><a href="mailto:federico.raimondi@gsom.polimi.it" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-
-				</div>
-
-			</div>
-
-		<!-- Main -->
-			<div id="main">
-				<!-- Portfolio -->
-				<section id="top" class="two">
-					<div id="markdown-content" style="padding: 0px; max-width: 100%; box-sizing: border-box;"></div>
-				</section>
-			</div>
-			<!-- Footer -->
-			<div id="footer">
-
-			<!-- Copyright -->
-			<ul class="copyright">
-				<li>&copy; Federico Raimondi Cominesi. All rights reserved.</li>
-			</ul>
-			<ul class="icons">
-				<li><a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-				<li><a href="https://github.com/FedericoRaimondi" class="icon brands fa-github"><span class="label">Github</span></a></li>
-				<li><a href="https://www.kaggle.com/raimonds1993" class="icon brands fa-kaggle"><span class="label">Kaggle</span></a></li>
-				<li><a href="mailto:federico.raimondi@gsom.polimi.it" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-			</ul>
-
-		</div>
-
-		<!-- Scripts -->
-		<script src="../assets/js/jquery.min.js"></script>
-		<script src="../assets/js/jquery.scrolly.min.js"></script>
-		<script src="../assets/js/jquery.scrollex.min.js"></script>
-		<script src="../assets/js/browser.min.js"></script>
-		<script src="../assets/js/breakpoints.min.js"></script>
-		<script src="../assets/js/util.js"></script>
-		<script src="../assets/js/main.js"></script>
-		<!-- Use CDN for showdown.js -->
-        <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-        <script>
-			// Fetch and display the Markdown content
-			fetch('ReadMe.md')
-				.then(response => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok ' + response.statusText);
-					}
-					return response.text();
-				})
-				.then(text => {
-					var converter = new showdown.Converter();
-					var html = converter.makeHtml(text);
-					document.getElementById('markdown-content').innerHTML = html;
-		
-					// Generate TOC
-					var toc = document.getElementById('toc');
-					var tempDiv = document.createElement('div');
-					tempDiv.innerHTML = html;
-					var headers = tempDiv.querySelectorAll('h1, h2');
-					var currentLevel = 1;
-					var currentList = toc;
-					headers.forEach(header => {
-						var level = parseInt(header.tagName.substring(1));
-						var link = document.createElement('a');
-						link.href = '#' + header.id;
-						link.textContent = header.textContent;
-						var listItem = document.createElement('li');
-						listItem.appendChild(link);
-		
-						currentList.appendChild(listItem);
-						currentLevel = level;
-					});
-				})
-				.catch(error => {
-					console.error('There has been a problem with your fetch operation:', error);
-				});
-		</script>
-		<style>
-            #markdown-content img {
-                max-width: 100%;
-                height: auto;
-                display: block;
-                margin: 0 auto;
+        @media (max-width: 768px) {
+            .nav {
+            width: 30%;
+            left: -30%;
             }
-        </style>
-	</body>
+        }
+        .nav.open {
+            left: 0;
+        }
+        .nav-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-profile {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: 30px;
+            margin-bottom: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .nav a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: var(--accent-blue);
+        }
+        .toggle-nav {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            z-index: 1001;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 5px;
+            opacity: 0.7;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 0px;
+            margin-left: 0px;
+            width: 100%;
+            height: 100vh;
+            transition: margin-left 0.3s;
+            overflow-x: hidden;
+        }
+        .main-content.nav-open {
+            margin-left: 200px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content.nav-open {
+            margin-left: 30%;
+            }
+        }
+        .hero {
+            height: 40vh;
+            background-image: linear-gradient(rgba(0, 31, 63, 0.4), rgba(0, 31, 63, 0.4)), url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column; /* Ensure elements are stacked vertically */
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            background-color: rgba(0, 31, 63, 0.3);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 0; /* Remove default margin */
+        }
+        .hero p {
+            background-color: rgba(0, 31, 63, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px; /* Add some space between h1 and p */
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+            font-size: 1.8em;
+            }
+            .hero p {
+            font-size: 0.9em;
+            }
+        }
+        .section {
+            margin-bottom: 20px;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: var(--navy-blue);
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 10px;
+        }
+        .toc {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        .toc a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .toc a:hover {
+            color: var(--accent-blue);
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project {
+            background-color: var(--white);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+        }
+        .project img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .project h3 {
+            padding: 10px;
+            margin: 0;
+            color: var(--navy-blue);
+            font-size: 1em; /* Reduced the title size */
+        }
+        .certifications {
+            display: grid;
+            gap: 5px;
+        }
+        .certification {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--navy-blue);
+            transition: background-color 0.3s;
+        }
+        .certification:hover {
+            background-color: var(--light-grey);
+        }
+        .certification img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 0%;
+            object-fit: contain;
+        }
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .about img {
+            width: 200px;
+            height: 200px;
+            border-radius: 20%;
+            object-fit: cover;
+            border: 0px solid var(--navy-blue);
+        }
+        .about ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .about li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .about li::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about li:nth-child(1)::before {
+            content: "\f433";
+        }
+        .about li:nth-child(2)::before {
+            content: "\f0c0";
+        }
+        .about li:nth-child(3)::before {
+            font-family: "Font Awesome 5 Brands";
+            content: "\f3c6";
+        }
+        .icons-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .icons-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="toggle-nav" onclick="toggleNav()">☰</button>
+        <nav class="nav" id="nav">
+            <div class="nav-content">
+                <div class="nav-profile">
+                    <a href="../index.html">
+                        <img src="/images/frc_pic.JPG" alt="Profile Picture">
+                    </a>
+                </div>
+                <p style="text-align: center;">
+                    <a href="../index.html" style="color: var(--white); text-decoration: none;">
+                        <strong>Federico<br/>Raimondi Cominesi</strong>
+                        <br/><em style="font-size: 0.9em;">Senior Data Scientist</em>
+                    </a>
+                </p>
+                <a href="../index.html">Home</a>
+                <a href="#home">Go to top</a>
+                <ul id="toc" class="toc" style="text-align: center;"></ul>
+            </div>
+            <div class="icons-link" style="gap: 15px;">
+                <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-kaggle"></i>
+                </a>
+                <a href="mailto:federico.raimondi@gsom.polimi.it" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </nav>
+        <main class="main-content" id="main-content">
+            <section id="home" class="hero">
+                <h1>Data Innovation Summit</h1>
+            </section>
+
+            <section id="toc" class="section">
+                <div id="markdown-content" style="padding: 10px; max-width: 100%; box-sizing: border-box;"></div>
+            </section>
+            
+            <footer style="background-color: var(--white); color: var(--dark-blue); text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%;">
+                <p>Federico Raimondi Cominesi &copy; 2024</p>
+                <div class="icons-link" style="gap: 15px;">
+                    <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin" style="color: var(--dark-blue);"></i>
+                    </a>
+                    <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github" style="color: var(--dark-blue);"></i>
+                    </a>
+                    <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-kaggle" style="color: var(--dark-blue);"></i>
+                    </a>
+                    <a href="mailto:federico.raimondi@gsom.polimi.it" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-envelope" style="color: var(--dark-blue);"></i>
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script>
+        function toggleNav() {
+            document.getElementById('nav').classList.toggle('open');
+            document.getElementById('main-content').classList.toggle('nav-open');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <script>
+        // Fetch and display the Markdown content
+        fetch('ReadMe.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(text => {
+                var converter = new showdown.Converter();
+                var html = converter.makeHtml(text);
+                document.getElementById('markdown-content').innerHTML = html;
+    
+                // Generate TOC
+                var toc = document.getElementById('toc');
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                var headers = tempDiv.querySelectorAll('h1, h2');
+                var currentLevel = 1;
+                var currentList = toc;
+                headers.forEach(header => {
+                    var level = parseInt(header.tagName.substring(1));
+                    var link = document.createElement('a');
+                    link.href = '#' + header.id;
+                    link.textContent = header.textContent;
+                    var listItem = document.createElement('li');
+                    listItem.appendChild(link);
+    
+                    currentList.appendChild(listItem);
+                    currentLevel = level;
+                });
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    </script>
+    <style>
+        #markdown-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</body>
 </html>

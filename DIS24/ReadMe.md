@@ -8,7 +8,7 @@ Here is the video of the speech I gave on our MMM journey!
 
 <style>
   .responsive-iframe {
-    width: 80%;
+    width: 70%;
     height: 60vh; /* 100% of the viewport height */
     border: none; /* Optional: Remove border */
   }

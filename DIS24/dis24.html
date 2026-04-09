@@ -1,413 +1,598 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIS24</title>
-    <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/803742ed11b94.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="0"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
-    <style>
-        :root {
-            --navy-blue: #1d3956;
-            --dark-blue: #001f3f;
-            --light-grey: #f0f0f0;
-            --white: #ffffff;
-            --accent-blue: #5084c0;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-grey);
-            color: var(--navy-blue);
-        }
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-        .nav {
-            width: 200px;
-            background-color: var(--navy-blue);
-            color: var(--white);
-            padding: 0px;
-            position: fixed;
-            height: 100%;
-            left: -200px;
-            transition: left 0.3s;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIS24 Conference – Federico Raimondi Cominesi</title>
+  <script>
+    window._GA_ID = 'G-VYMCSFCQXW';
+    function loadGA() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._GA_ID;
+      document.head.appendChild(s);
+      s.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', window._GA_ID);
+      };
+    }
+    if (localStorage.getItem('cookie_consent') === 'accepted') { loadGA(); }
+  </script>
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --wine: #381d2a;
+      --blue: #3e6990;
+      --green: #aabd8c;
+      --cream: #e9e3b4;
+      --olive: #373d20;
+      --bg: #f7f4ed;
+      --fg: #1e2314;
+      --bg-card: #ffffff;
+      --fg-muted: rgba(35, 40, 20, 0.65);
+      --fg-subtle: rgba(35, 40, 20, 0.38);
+      --header-bg: rgba(247, 244, 237, 0.93);
+      --border-blue: rgba(62, 105, 144, 0.22);
+      --shadow: 0 4px 20px rgba(55, 61, 32, 0.09);
+    }
 
-        @media (max-width: 768px) {
-            .nav {
-            width: 30%;
-            left: -30%;
-            }
-        }
-        .nav.open {
-            left: 0;
-        }
-        .nav-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .nav-profile {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-top: 30px;
-            margin-bottom: 0px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .nav-profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .nav a {
-            display: block;
-            color: var(--white);
-            text-decoration: none;
-            padding: 10px 0;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .nav a:hover {
-            color: var(--accent-blue);
-        }
-        .toggle-nav {
-            position: fixed;
-            left: 10px;
-            top: 10px;
-            z-index: 1001;
-            background-color: var(--dark-blue);
-            color: var(--white);
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 20px;
-            border-radius: 5px;
-            opacity: 0.7;
-        }
-        .main-content {
-            flex-grow: 1;
-            padding: 0px;
-            margin-left: 0px;
-            width: 100%;
-            height: 100vh;
-            transition: margin-left 0.3s;
-            overflow-x: hidden;
-        }
-        .main-content.nav-open {
-            margin-left: 200px;
-        }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
 
-        @media (max-width: 768px) {
-            .main-content.nav-open {
-            margin-left: 30%;
-            }
-        }
-        .hero {
-            height: 40vh;
-            background-image: linear-gradient(rgba(0, 31, 63, 0.4), rgba(0, 31, 63, 0.4)), url('/images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column; /* Ensure elements are stacked vertically */
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            background-color: rgba(0, 31, 63, 0.3);
-            padding: 20px;
-            border-radius: 5px;
-            margin: 0; /* Remove default margin */
-        }
-        .hero p {
-            background-color: rgba(0, 31, 63, 0.3);
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px; /* Add some space between h1 and p */
-        }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-            font-size: 1.8em;
-            }
-            .hero p {
-            font-size: 0.9em;
-            }
-        }
-        .section {
-            margin-bottom: 20px;
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .section h2 {
-            color: var(--navy-blue);
-            border-bottom: 2px solid var(--accent-blue);
-            padding-bottom: 10px;
-        }
-        .toc {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .toc li {
-            margin: 5px 0;
-        }
-        .toc a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .toc a:hover {
-            color: var(--accent-blue);
-        }
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .project {
-            background-color: var(--white);
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        .project:hover {
-            transform: translateY(-5px);
-        }
-        .project img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-        .project h3 {
-            padding: 10px;
-            margin: 0;
-            color: var(--navy-blue);
-            font-size: 1em; /* Reduced the title size */
-        }
-        .certifications {
-            display: grid;
-            gap: 5px;
-        }
-        .certification {
-            display: flex;
-            align-items: center;
-            background-color: var(--white);
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: var(--navy-blue);
-            transition: background-color 0.3s;
-        }
-        .certification:hover {
-            background-color: var(--light-grey);
-        }
-        .certification img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-            border-radius: 0%;
-            object-fit: contain;
-        }
-        .about {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .about img {
-            width: 200px;
-            height: 200px;
-            border-radius: 20%;
-            object-fit: cover;
-            border: 0px solid var(--navy-blue);
-        }
-        .about ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .about li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .about li::before {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            color: var(--dark-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .about li:nth-child(1)::before {
-            content: "\f433";
-        }
-        .about li:nth-child(2)::before {
-            content: "\f0c0";
-        }
-        .about li:nth-child(3)::before {
-            font-family: "Font Awesome 5 Brands";
-            content: "\f3c6";
-        }
-        .icons-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .icons-link svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--white);
-        }
-    </style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s, opacity 0.2s;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-blue);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-header__logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--olive);
+    }
+
+    .site-header__subtitle {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--fg-muted);
+      line-height: 1.2;
+      margin-top: 0.1rem;
+    }
+
+    .site-header__logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .site-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .site-header__nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+    }
+
+    .site-header__nav a:hover {
+      color: var(--blue);
+    }
+
+    .site-header__social {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .site-header__social a {
+      font-size: 1rem;
+      color: var(--fg-muted);
+    }
+
+    .site-header__social a:hover {
+      color: var(--blue);
+    }
+
+    .btn-hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: var(--fg-muted);
+      font-size: 1.2rem;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-blue);
+      background: var(--header-bg);
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--blue);
+    }
+
+    /* Page hero */
+    .page-hero {
+      padding-top: 64px;
+      background: linear-gradient(140deg, var(--olive) 0%, #2d3a18 50%, #1a2412 100%);
+      padding-bottom: 2.5rem;
+    }
+
+    .page-hero__inner {
+      padding-top: 2rem;
+    }
+
+    .page-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: rgba(170, 189, 140, 0.75);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero__back:hover {
+      color: var(--green);
+    }
+
+    .page-hero__title {
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    /* Content */
+    .page-main {
+      padding: 3rem 0 5rem;
+    }
+
+    /* Markdown styles */
+    .markdown-body h1,
+    .markdown-body h2 {
+      color: var(--fg);
+      font-weight: 700;
+      margin: 2rem 0 0.75rem;
+      line-height: 1.3;
+    }
+
+    .markdown-body h1 {
+      font-size: 1.7rem;
+      border-bottom: 2px solid var(--border-blue);
+      padding-bottom: 0.5rem;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--border-blue);
+      padding-bottom: 0.35rem;
+    }
+
+    .markdown-body h3 {
+      font-size: 1.05rem;
+      color: var(--blue);
+      margin: 1.5rem 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .markdown-body p {
+      color: var(--fg-muted);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      color: var(--fg-muted);
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .markdown-body li {
+      margin-bottom: 0.35rem;
+    }
+
+    .markdown-body a {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .markdown-body a:hover {
+      color: var(--olive);
+    }
+
+    .markdown-body code {
+      background: rgba(55, 61, 32, 0.08);
+      border-radius: 4px;
+      padding: 0.15em 0.4em;
+      font-size: 0.88em;
+      color: var(--olive);
+    }
+
+    .markdown-body pre {
+      background: #1e2314;
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.25rem;
+    }
+
+    .markdown-body pre code {
+      background: none;
+      color: var(--cream);
+      padding: 0;
+    }
+
+    .markdown-body blockquote {
+      border-left: 4px solid var(--green);
+      padding-left: 1rem;
+      color: var(--fg-muted);
+      font-style: italic;
+      margin: 1.25rem 0;
+    }
+
+    .markdown-body img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin: 1.25rem auto;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .markdown-body th {
+      background: rgba(55, 61, 32, 0.08);
+      font-weight: 600;
+      color: var(--fg);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 2px solid var(--border-blue);
+    }
+
+    .markdown-body td {
+      padding: 0.55rem 0.75rem;
+      color: var(--fg-muted);
+      border-bottom: 1px solid var(--border-blue);
+    }
+
+    .markdown-body tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--olive);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .site-footer p {
+      font-size: 0.85rem;
+      color: rgba(233, 227, 180, 0.6);
+      margin-bottom: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .footer-social a {
+      font-size: 1.1rem;
+      color: rgba(233, 227, 180, 0.65);
+    }
+
+    .footer-social a:hover {
+      color: var(--green);
+    }
+
+    /* Cookie Banner */
+    #cookie-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      background: rgba(30, 35, 18, 0.97);
+      border-top: 1px solid rgba(170, 189, 140, 0.25);
+      padding: 1rem 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      backdrop-filter: blur(6px);
+    }
+
+    .cookie-banner__text {
+      font-size: 0.82rem;
+      color: rgba(233, 227, 180, 0.85);
+      line-height: 1.6;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .cookie-banner__text a {
+      color: var(--green);
+      text-decoration: underline;
+    }
+
+    .cookie-banner__actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .cookie-banner__btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .cookie-banner__btn:hover {
+      opacity: 0.85;
+    }
+
+    .cookie-banner__btn--accept {
+      background: #90d870;
+      color: #1a2e10;
+    }
+
+    .cookie-banner__btn--decline {
+      background: transparent;
+      color: rgba(233, 227, 180, 0.7);
+      border: 1px solid rgba(233, 227, 180, 0.25);
+    }
+
+    @media (max-width: 767px) {
+      .site-header__nav {
+        display: none;
+      }
+
+      .site-header__social {
+        display: none;
+      }
+
+      .btn-hamburger {
+        display: flex;
+      }
+    }
+  </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VYMCSFCQXW"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
 
-gtag('config', 'G-VYMCSFCQXW');
-</script>
 <body>
-    <div class="container">
-        <button class="toggle-nav" onclick="toggleNav()">☰</button>
-        <nav class="nav" id="nav">
-            <div class="nav-content">
-                <div class="nav-profile">
-                    <a href="../index.html">
-                        <img src="/images/frc_pic.JPG" alt="Profile Picture">
-                    </a>
-                </div>
-                <p style="text-align: center;">
-                    <a href="../index.html" style="color: var(--white); text-decoration: none;">
-                        <strong>Federico<br/>Raimondi Cominesi</strong>
-                        <br/><em style="font-size: 0.9em;">Senior Data Scientist</em>
-                    </a>
-                </p>
-                <a href="../index.html">Home</a>
-                <a href="#home">Go to top</a>
-                <ul id="toc" class="toc" style="text-align: center;"></ul>
-            </div>
-            <div class="icons-link" style="gap: 15px;">
-                <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-kaggle"></i>
-                </a>
-                <a href="mailto:federico.raimondi@gsom.polimi.it" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
-        </nav>
-        <main class="main-content" id="main-content">
-            <section id="home" class="hero">
-                <h1>Data Innovation Summit</h1>
-            </section>
 
-            <section id="toc" class="section">
-                <div id="markdown-content" style="padding: 10px; max-width: 100%; box-sizing: border-box;"></div>
-            </section>
-            
-            <footer style="background-color: var(--white); color: var(--dark-blue); text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%;">
-                <p>Federico Raimondi Cominesi &copy; 2024</p>
-                <div class="icons-link" style="gap: 15px;">
-                    <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin" style="color: var(--dark-blue);"></i>
-                    </a>
-                    <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github" style="color: var(--dark-blue);"></i>
-                    </a>
-                    <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-kaggle" style="color: var(--dark-blue);"></i>
-                    </a>
-                    <a href="mailto:federico.raimondi@gsom.polimi.it" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-envelope" style="color: var(--dark-blue);"></i>
-                    </a>
-                </div>
-            </footer>
-        </main>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__logo" href="../index.html">
+        <img src="/images/frc_pic.JPG" alt="FRC">
+        <div>
+          <span>Federico Raimondi Cominesi</span>
+          <span class="site-header__subtitle">Senior Machine Learning Engineer</span>
+        </div>
+      </a>
+      <nav class="site-header__nav" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#certifications">Certifications</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+      <div class="site-header__social">
+        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-github"></i></a>
+        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-kaggle"></i></a>
+        <a href="mailto:federico.raimondi@gsom.polimi.it"><i class="fas fa-envelope"></i></a>
+      </div>
+      <button class="btn-hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-    <script>
-        function toggleNav() {
-            document.getElementById('nav').classList.toggle('open');
-            document.getElementById('main-content').classList.toggle('nav-open');
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-    <script>
-        // Fetch and display the Markdown content
-        fetch('ReadMe.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.text();
-            })
-            .then(text => {
-                var converter = new showdown.Converter();
-                var html = converter.makeHtml(text);
-                document.getElementById('markdown-content').innerHTML = html;
-    
-                // Generate TOC
-                var toc = document.getElementById('toc');
-                var tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                var headers = tempDiv.querySelectorAll('h1, h2');
-                var currentLevel = 1;
-                var currentList = toc;
-                headers.forEach(header => {
-                    var level = parseInt(header.tagName.substring(1));
-                    var link = document.createElement('a');
-                    link.href = '#' + header.id;
-                    link.textContent = header.textContent;
-                    var listItem = document.createElement('li');
-                    listItem.appendChild(link);
-    
-                    currentList.appendChild(listItem);
-                    currentLevel = level;
-                });
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-    </script>
-    <style>
-        #markdown-content img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="../index.html" onclick="closeMobileNav()">Home</a>
+      <a href="../index.html#projects" onclick="closeMobileNav()">Projects</a>
+      <a href="../index.html#certifications" onclick="closeMobileNav()">Certifications</a>
+      <a href="../index.html#about" onclick="closeMobileNav()">About</a>
+    </nav>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <a class="page-hero__back" href="../index.html#projects">
+        <i class="fas fa-arrow-left"></i> back to projects
+      </a>
+      <h1 class="page-hero__title">Data Innovation Summit 2024</h1>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="page-main">
+    <div class="container">
+      <div id="markdown-content" class="markdown-body"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Federico Raimondi Cominesi &copy; 2026</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-github"></i></a>
+        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer"><i
+            class="fab fa-kaggle"></i></a>
+        <a href="mailto:federico.raimondi@gsom.polimi.it"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-banner-desc">
+    <p id="cookie-banner-desc" class="cookie-banner__text">
+      <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+      This site uses <strong>Google Analytics</strong> to collect anonymous usage statistics (GDPR Art.&#160;6(1)(a)).
+      Your IP address may be processed by Google. See our <a href="../privacy.html">privacy policy</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept">Accept</button>
+      <button id="cookie-decline" class="cookie-banner__btn cookie-banner__btn--decline">Decline</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+  <script>
+    /* Cookie consent */
+    (function () {
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      if (!localStorage.getItem('cookie_consent')) { banner.style.display = 'flex'; }
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.style.display = 'none';
+        if (typeof loadGA === 'function') loadGA();
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function () {
+        localStorage.setItem('cookie_consent', 'declined');
+        banner.style.display = 'none';
+      });
+    })();
+
+    /* Mobile nav */
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileNav = document.getElementById('mobile-nav');
+    hamburgerBtn.addEventListener('click', function () {
+      var open = mobileNav.classList.toggle('is-open');
+      hamburgerBtn.setAttribute('aria-expanded', open);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('is-open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    /* Markdown fetch */
+    fetch('ReadMe.md')
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load ' + r.statusText);
+        return r.text();
+      })
+      .then(function (text) {
+        var converter = new showdown.Converter({ tables: true, strikethrough: true });
+        document.getElementById('markdown-content').innerHTML = converter.makeHtml(text);
+      })
+      .catch(function (err) {
+        document.getElementById('markdown-content').textContent = 'Could not load content: ' + err.message;
+      });
+  </script>
 </body>
+
 </html>

@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Federico Raimondi Cominesi</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYMCSFCQXW"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-VYMCSFCQXW');
+    window._GA_ID = 'G-VYMCSFCQXW';
+    function loadGA() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._GA_ID;
+      document.head.appendChild(s);
+      s.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', window._GA_ID);
+      };
+    }
+    if (localStorage.getItem('cookie_consent') === 'accepted') { loadGA(); }
   </script>
-  <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/803742ed11b94.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="0"></script>
+  <!-- GA loaded only after cookie consent -->
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* Colors: #381d2a (wine) · #3e6990 (blue) · #aabd8c (green) · #e9e3b4 (cream) · #373d20 (olive) */
     :root {
-      --wine:  #381d2a;
-      --blue:  #3e6990;
+      --wine: #381d2a;
+      --blue: #3e6990;
       --green: #aabd8c;
       --cream: #e9e3b4;
       --olive: #373d20;
 
-      --bg:           #f7f4ed;
-      --fg:           #2a1e24;
-      --bg-card:      #ffffff;
-      --bg-alt:       rgba(55, 61, 32, 0.04);
-      --fg-muted:     rgba(42, 30, 36, 0.65);
-      --fg-subtle:    rgba(42, 30, 36, 0.38);
-      --header-bg:    rgba(247, 244, 237, 0.93);
-      --border-blue:  rgba(62, 105, 144, 0.22);
+      --bg: #f7f4ed;
+      --fg: #1e2314;
+      --bg-card: #ffffff;
+      --bg-alt: rgba(55, 61, 32, 0.04);
+      --fg-muted: rgba(35, 40, 20, 0.65);
+      --fg-subtle: rgba(35, 40, 20, 0.38);
+      --header-bg: rgba(247, 244, 237, 0.93);
+      --border-blue: rgba(62, 105, 144, 0.22);
       --border-green: rgba(170, 189, 140, 0.30);
-      --bg-blue:      rgba(62, 105, 144, 0.08);
-      --bg-green:     rgba(170, 189, 140, 0.12);
-      --shadow:       0 4px 20px rgba(56, 29, 42, 0.09);
+      --bg-blue: rgba(62, 105, 144, 0.08);
+      --bg-green: rgba(170, 189, 140, 0.12);
+      --shadow: 0 4px 20px rgba(55, 61, 32, 0.09);
     }
 
-    *, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
 
     body {
       font-family: 'Roboto', sans-serif;
@@ -51,200 +73,423 @@
       line-height: 1.6;
     }
 
-    img    { display: block; max-width: 100%; }
-    a      { text-decoration: none; color: inherit; transition: color 0.2s, opacity 0.2s; }
-    ul     { list-style: none; }
-    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s, opacity 0.2s;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
     /* ===== Header ===== */
     .site-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
       background: var(--header-bg);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-blue);
     }
 
     .site-header__inner {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       height: 64px;
     }
 
     .site-header__logo {
-      display: flex; align-items: center; gap: 0.75rem;
-      font-size: 1.05rem; font-weight: 700; color: var(--wine);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--olive);
+    }
+
+    .site-header__subtitle {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--fg-muted);
+      line-height: 1.2;
+      margin-top: 0.1rem;
+      letter-spacing: 0.01em;
     }
 
     .site-header__logo img {
-      width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
-    .site-header__nav { display: flex; align-items: center; gap: 2rem; }
-    .site-header__nav a { font-size: 0.875rem; font-weight: 500; color: var(--fg-muted); }
-    .site-header__nav a:hover { color: var(--blue); }
+    .site-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-    .site-header__social { display: flex; align-items: center; gap: 1rem; }
-    .site-header__social a { font-size: 1rem; color: var(--fg-muted); }
-    .site-header__social a:hover { color: var(--blue); }
+    .site-header__nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+    }
+
+    .site-header__nav a:hover {
+      color: var(--blue);
+    }
+
+    .site-header__social {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .site-header__social a {
+      font-size: 1rem;
+      color: var(--fg-muted);
+    }
+
+    .site-header__social a:hover {
+      color: var(--blue);
+    }
 
     .btn-hamburger {
-      display: none; align-items: center; justify-content: center;
-      width: 36px; height: 36px; color: var(--fg-muted); font-size: 1.2rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: var(--fg-muted);
+      font-size: 1.2rem;
     }
 
     .mobile-nav {
-      display: none; flex-direction: column; gap: 0.75rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
       padding: 1rem 1.5rem;
       border-top: 1px solid var(--border-blue);
       background: var(--header-bg);
     }
 
-    .mobile-nav.is-open { display: flex; }
-    .mobile-nav a { font-size: 0.9rem; color: var(--fg-muted); }
-    .mobile-nav a:hover { color: var(--blue); }
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--blue);
+    }
 
     /* ===== Hero ===== */
     .hero {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       padding-top: 64px;
-      background: linear-gradient(140deg, var(--wine) 0%, #4a2536 45%, var(--olive) 100%);
-      position: relative; overflow: hidden;
+      background:
+        linear-gradient(rgba(30, 40, 15, 0.72), rgba(20, 28, 10, 0.82)),
+        url('/images/valtellina.png') center/cover no-repeat scroll;
+      position: relative;
+      overflow: hidden;
       text-align: center;
     }
 
-    .hero__bg-blobs { position: absolute; inset: 0; pointer-events: none; }
+    .hero__bg-blobs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-    .hero__blob { position: absolute; border-radius: 50%; filter: blur(72px); }
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+    }
 
     .hero__blob--tl {
-      top: -8rem; left: -8rem; width: 22rem; height: 22rem;
+      top: -8rem;
+      left: -8rem;
+      width: 22rem;
+      height: 22rem;
       background: rgba(62, 105, 144, 0.18);
     }
 
     .hero__blob--br {
-      bottom: -8rem; right: -8rem; width: 22rem; height: 22rem;
+      bottom: -8rem;
+      right: -8rem;
+      width: 22rem;
+      height: 22rem;
       background: rgba(170, 189, 140, 0.14);
     }
 
-    .hero__inner { position: relative; z-index: 2; padding: 5rem 0; }
+    .hero__inner {
+      position: relative;
+      z-index: 2;
+      padding: 1rem 0 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .hero__badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.4rem 1rem;
       border: 1px solid rgba(170, 189, 140, 0.35);
       border-radius: 9999px;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--green);
-      margin-bottom: 2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-top: 4rem;
+      margin-bottom: 0.75rem;
     }
 
     .hero__badge-dot {
-      width: 0.45rem; height: 0.45rem; border-radius: 50%;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
       background: var(--green);
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1;    }
-      50%       { opacity: 0.35; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.35;
+      }
     }
 
     .hero__title {
-      font-size: clamp(1.75rem, 4.5vw, 2.85rem);
-      font-weight: 700; color: var(--cream);
-      line-height: 1.35; max-width: 680px; margin: 0 auto 2.75rem;
+      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.5;
+      max-width: 520px;
+      margin: 0 auto 1rem;
+      opacity: 0.85;
     }
 
-    .hero__title em { font-style: normal; color: var(--green); }
+    .hero__title em {
+      font-style: normal;
+      color: var(--cream);
+    }
 
     .hero__play-wrap {
-      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-    }
-
-    .hero__play-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 72px; height: 72px; border-radius: 50%;
-      background: var(--blue); color: #fff;
-      font-size: 1.4rem;
-      border: 3px solid rgba(255,255,255,0.18);
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 0 32px rgba(62, 105, 144, 0.55);
-    }
-
-    .hero__play-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 52px rgba(62, 105, 144, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .hero__play-hint {
-      font-size: 0.78rem; color: rgba(233, 227, 180, 0.55);
+      font-size: 0.78rem;
+      color: rgba(233, 227, 180, 0.55);
       letter-spacing: 0.06em;
     }
 
-    /* ===== Pong Overlay ===== */
-    #pong-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(15, 8, 12, 0.88);
-      align-items: center; justify-content: center; flex-direction: column;
+    /* ===== Pong Section (hero-integrated) ===== */
+    .pong-section {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem 1rem 1.5rem;
     }
 
-    #pong-overlay.is-open { display: flex; }
-
-    #pong-close {
-      position: absolute; top: 1.25rem; right: 1.5rem;
-      color: rgba(255,255,255,0.7); font-size: 1.75rem;
-      background: none; border: none; cursor: pointer;
-      transition: color 0.2s;
+    .pong-section__inner {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 460px;
     }
-
-    #pong-close:hover { color: #fff; }
 
     #pong-score {
       font-family: 'Roboto', sans-serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--cream); margin-bottom: 0.75rem;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    #pong-score.active {
+      opacity: 1;
+    }
+
+    .pong-canvas-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
     }
 
     #pong-canvas {
-      border-radius: 8px;
-      max-width: 92vw; max-height: 75vh;
+      border-radius: 10px;
       display: block;
+      width: 100%;
+      height: auto;
+      transition: filter 0.4s, opacity 0.4s;
+      filter: blur(6px) brightness(0.6);
+    }
+
+    #pong-canvas.active {
+      filter: none;
+    }
+
+    .pong-overlay-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      transition: opacity 0.3s;
+    }
+
+    .pong-overlay-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pong-result-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      z-index: 4;
+      background: rgba(10, 18, 6, 0.55);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .pong-result-overlay.visible {
+      display: flex;
+    }
+
+    .pong-result-msg {
+      font-family: 'Roboto', sans-serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.5;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero__play-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2.25rem;
+      border-radius: 8px;
+      background: #90d870;
+      color: #1a2e10;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 32px rgba(144, 216, 112, 0.6), 0 2px 16px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    .hero__play-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 48px rgba(144, 216, 112, 0.75), 0 2px 20px rgba(0, 0, 0, 0.45);
     }
 
     #pong-instructions {
       font-family: 'Roboto', sans-serif;
-      font-size: 0.78rem; color: rgba(233, 227, 180, 0.55);
-      text-align: center; margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: rgba(30, 35, 20, 0.45);
+      text-align: center;
     }
 
     /* ===== Sections ===== */
-    section { padding: 5rem 0; }
+    section {
+      padding: 5rem 0;
+    }
 
     .section-label {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
     }
 
     .section-title {
       font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-      font-weight: 700; color: var(--fg); line-height: 1.25;
+      font-weight: 700;
+      color: var(--fg);
+      line-height: 1.25;
     }
 
-    .section-header { margin-bottom: 2.75rem; }
-    .section-header.centered { text-align: center; }
+    .section-header {
+      margin-bottom: 2.75rem;
+    }
+
+    .section-header.centered {
+      text-align: center;
+    }
 
     /* ===== Projects ===== */
-    .projects-section { background: var(--bg); }
+    .projects-section {
+      background: var(--bg);
+    }
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 1.5rem; margin-bottom: 2.5rem;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
     }
 
     .project-card {
@@ -258,50 +503,84 @@
 
     .project-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 32px rgba(56, 29, 42, 0.14);
+      box-shadow: 0 10px 32px rgba(55, 61, 32, 0.14);
     }
 
-    .project-card__img { width: 100%; height: 158px; object-fit: cover; }
+    .project-card__img {
+      width: 100%;
+      height: 158px;
+      object-fit: cover;
+    }
 
     .project-card__placeholder {
-      width: 100%; height: 158px;
-      background: linear-gradient(135deg, var(--wine) 0%, var(--blue) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem; color: var(--cream);
+      width: 100%;
+      height: 158px;
+      background: linear-gradient(135deg, var(--olive) 0%, var(--blue) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--cream);
     }
 
-    .project-card__body { padding: 1rem 1.25rem 1.25rem; }
+    .project-card__body {
+      padding: 1rem 1.25rem 1.25rem;
+    }
 
     .project-card__tag {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 0.35rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.35rem;
     }
 
     .project-card__title {
-      font-size: 0.95rem; font-weight: 600; color: var(--fg); margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.4rem;
     }
 
-    .project-card__desc { font-size: 0.825rem; color: var(--fg-muted); line-height: 1.6; }
+    .project-card__desc {
+      font-size: 0.825rem;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
 
     .project-card__link {
-      display: inline-flex; align-items: center; gap: 0.35rem;
-      margin-top: 0.75rem; font-size: 0.8rem; font-weight: 500; color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--blue);
     }
 
-    .project-card__link:hover { color: var(--wine); }
+    .project-card__link:hover {
+      color: var(--olive);
+    }
 
     .project-card__soon {
-      display: inline-block; margin-top: 0.75rem;
-      font-size: 0.78rem; color: var(--fg-subtle);
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--fg-subtle);
       border: 1px solid var(--border-blue);
-      border-radius: 9999px; padding: 0.2rem 0.7rem;
+      border-radius: 9999px;
+      padding: 0.2rem 0.7rem;
     }
 
     /* ===== Kaggle Accordion ===== */
     .kaggle-section-label {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
     }
 
     .kaggle-accordion {
@@ -313,66 +592,120 @@
     }
 
     .kaggle-accordion__header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 1.5rem; cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
       transition: background 0.2s;
       user-select: none;
     }
 
-    .kaggle-accordion__header:hover { background: var(--bg-green); }
-
-    .kaggle-accordion__title {
-      display: flex; align-items: center; gap: 0.7rem;
-      font-size: 1.05rem; font-weight: 700; color: var(--fg);
+    .kaggle-accordion__header:hover {
+      background: var(--bg-green);
     }
 
-    .kaggle-accordion__title i { color: var(--blue); }
+    .kaggle-accordion__title {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
 
-    .kaggle-accordion__meta { font-size: 0.78rem; font-weight: 400; color: var(--fg-muted); }
+    .kaggle-accordion__title i {
+      color: var(--blue);
+    }
+
+    .kaggle-accordion__meta {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--fg-muted);
+    }
 
     .kaggle-accordion__chevron {
-      font-size: 0.9rem; color: var(--blue);
+      font-size: 0.9rem;
+      color: var(--blue);
       transition: transform 0.3s;
     }
 
-    .kaggle-accordion.is-open .kaggle-accordion__chevron { transform: rotate(180deg); }
+    .kaggle-accordion.is-open .kaggle-accordion__chevron {
+      transform: rotate(180deg);
+    }
 
-    .kaggle-accordion__body { display: none; border-top: 1px solid var(--border-blue); }
-    .kaggle-accordion.is-open .kaggle-accordion__body { display: block; }
+    .kaggle-accordion__body {
+      display: none;
+      border-top: 1px solid var(--border-blue);
+    }
+
+    .kaggle-accordion.is-open .kaggle-accordion__body {
+      display: block;
+    }
 
     .kaggle-item {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       padding: 0.9rem 1.5rem;
       border-bottom: 1px solid rgba(62, 105, 144, 0.08);
-      color: inherit; transition: background 0.15s;
+      color: inherit;
+      transition: background 0.15s;
     }
 
-    .kaggle-item:last-child { border-bottom: none; }
-    .kaggle-item:hover { background: var(--bg-green); }
+    .kaggle-item:last-child {
+      border-bottom: none;
+    }
+
+    .kaggle-item:hover {
+      background: var(--bg-green);
+    }
 
     .kaggle-item__img {
-      width: 54px; height: 38px; object-fit: cover;
-      border-radius: 0.35rem; flex-shrink: 0;
+      width: 54px;
+      height: 38px;
+      object-fit: cover;
+      border-radius: 0.35rem;
+      flex-shrink: 0;
     }
 
-    .kaggle-item__info { flex: 1; min-width: 0; }
+    .kaggle-item__info {
+      flex: 1;
+      min-width: 0;
+    }
 
     .kaggle-item__name {
-      font-size: 0.875rem; font-weight: 600; color: var(--fg);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--fg);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .kaggle-item__medal {
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      font-size: 0.75rem; color: var(--fg-muted); margin-top: 0.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--fg-muted);
+      margin-top: 0.15rem;
     }
 
-    .kaggle-item__medal i { color: var(--blue); }
+    .kaggle-item__medal i {
+      color: var(--blue);
+    }
 
-    .kaggle-item__arrow { color: var(--fg-subtle); font-size: 0.78rem; flex-shrink: 0; }
+    .kaggle-item__arrow {
+      color: var(--fg-subtle);
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
 
     /* ===== Certifications ===== */
-    .certifications-section { background: var(--bg-alt); }
+    .certifications-section {
+      background: var(--bg-alt);
+    }
 
     .certs-grid {
       display: grid;
@@ -381,7 +714,9 @@
     }
 
     .cert-card {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       padding: 0.9rem 1.1rem;
       background: var(--bg-card);
       border: 1px solid var(--border-blue);
@@ -390,79 +725,358 @@
       transition: transform 0.2s, border-color 0.2s;
     }
 
-    .cert-card:hover { transform: translateY(-2px); border-color: var(--blue); }
-    .cert-card img { width: 42px; height: 42px; object-fit: contain; flex-shrink: 0; }
-    .cert-card__name { font-size: 0.875rem; font-weight: 600; color: var(--fg); }
-    .cert-card__issuer { font-size: 0.775rem; color: var(--fg-muted); margin-top: 0.15rem; }
+    .cert-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue);
+    }
+
+    .cert-card img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .cert-card__name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .cert-card__issuer {
+      font-size: 0.775rem;
+      color: var(--fg-muted);
+      margin-top: 0.15rem;
+    }
 
     /* ===== About ===== */
-    .about-section { background: var(--bg); }
-    .about-grid { display: grid; gap: 3rem; align-items: center; }
-    .about-img-wrap { display: flex; justify-content: center; }
+    .about-section {
+      background:
+        linear-gradient(rgba(30, 40, 15, 0.72), rgba(20, 28, 10, 0.82)),
+        url('/images/valtellina.png') center/cover no-repeat fixed;
+      position: relative;
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-img-wrap {
+      display: flex;
+      justify-content: center;
+    }
 
     .about-img {
-      width: 210px; height: 210px; border-radius: 1.25rem;
-      object-fit: cover; border: 3px solid var(--border-blue);
+      width: 210px;
+      height: 210px;
+      border-radius: 1.25rem;
+      object-fit: cover;
+      border: 3px solid var(--border-blue);
       box-shadow: var(--shadow);
     }
 
-    .about-text .section-title { margin-bottom: 1rem; }
+    .about-text .section-title {
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+
+    .about-text .section-label {
+      color: var(--green);
+    }
 
     .about-text p {
-      font-size: 0.95rem; color: var(--fg-muted);
-      line-height: 1.8; margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      color: rgba(233, 227, 180, 0.82);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
     }
 
     .about-text .motto {
-      font-size: 0.9rem; font-style: italic; color: var(--blue);
-      border-left: 3px solid var(--green); padding-left: 1rem; margin-top: 1rem;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--green);
+      border-left: 3px solid var(--green);
+      padding-left: 1rem;
+      margin-top: 1rem;
     }
 
-    .about-social { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .about-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
 
     .about-social a {
-      display: flex; align-items: center; gap: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
       padding: 0.45rem 0.9rem;
-      border: 1px solid var(--border-blue); border-radius: 0.5rem;
-      font-size: 0.85rem; color: var(--fg-muted);
+      border: 1px solid rgba(170, 189, 140, 0.35);
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+      color: rgba(233, 227, 180, 0.9);
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .about-social a:hover { border-color: var(--blue); color: var(--blue); }
+    .about-social a:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
 
     /* ===== Footer ===== */
-    .site-footer { background: var(--wine); padding: 2.5rem 0; text-align: center; }
+    .site-footer {
+      background: var(--olive);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
 
     .site-footer p {
-      font-size: 0.85rem; color: rgba(233, 227, 180, 0.6); margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: rgba(233, 227, 180, 0.6);
+      margin-bottom: 1rem;
     }
 
     .footer-social {
-      display: flex; align-items: center; justify-content: center; gap: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
     }
 
-    .footer-social a { font-size: 1.1rem; color: rgba(233, 227, 180, 0.65); }
-    .footer-social a:hover { color: var(--green); }
+    .footer-social a {
+      font-size: 1.1rem;
+      color: rgba(233, 227, 180, 0.65);
+    }
+
+    .footer-social a:hover {
+      color: var(--green);
+    }
 
     /* ===== Responsive ===== */
     @media (min-width: 768px) {
-      .about-grid { grid-template-columns: auto 1fr; }
+      .about-grid {
+        grid-template-columns: auto 1fr;
+      }
     }
 
     @media (max-width: 767px) {
-      .site-header__nav    { display: none; }
-      .site-header__social { display: none; }
-      .btn-hamburger       { display: flex; }
+      .site-header__nav {
+        display: none;
+      }
+
+      .site-header__social {
+        display: none;
+      }
+
+      .btn-hamburger {
+        display: flex;
+      }
+    }
+
+    /* ===== Cookie Banner ===== */
+    #cookie-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      background: rgba(30, 35, 18, 0.97);
+      border-top: 1px solid rgba(170, 189, 140, 0.25);
+      padding: 1rem 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      backdrop-filter: blur(6px);
+    }
+
+    .cookie-banner__text {
+      font-size: 0.82rem;
+      color: rgba(233, 227, 180, 0.85);
+      line-height: 1.6;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .cookie-banner__text a {
+      color: var(--green);
+      text-decoration: underline;
+    }
+
+    .cookie-banner__actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .cookie-banner__btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .cookie-banner__btn:hover {
+      opacity: 0.85;
+    }
+
+    .cookie-banner__btn--accept {
+      background: #90d870;
+      color: #1a2e10;
+    }
+
+    .cookie-banner__btn--decline {
+      background: transparent;
+      color: rgba(233, 227, 180, 0.7);
+      border: 1px solid rgba(233, 227, 180, 0.25);
+    }
+
+    /* ===== Experience Accordion ===== */
+    .exp-accordion {
+      margin-top: 2.5rem;
+      border: 1px solid rgba(170, 189, 140, 0.30);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .exp-accordion__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      user-select: none;
+    }
+
+    .exp-accordion__header:hover {
+      background: rgba(170, 189, 140, 0.10);
+    }
+
+    .exp-accordion__title {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .exp-accordion__title i {
+      color: var(--green);
+    }
+
+    .exp-accordion__chevron {
+      font-size: 0.9rem;
+      color: var(--green);
+      transition: transform 0.3s;
+    }
+
+    .exp-accordion.is-open .exp-accordion__chevron {
+      transform: rotate(180deg);
+    }
+
+    .exp-accordion__body {
+      display: none;
+      border-top: 1px solid rgba(170, 189, 140, 0.20);
+    }
+
+    .exp-accordion.is-open .exp-accordion__body {
+      display: block;
+    }
+
+    .exp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid rgba(170, 189, 140, 0.12);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+    }
+
+    .exp-item__logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+      background: #ffffff;
+      border: 1px solid rgba(170, 189, 140, 0.20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(233, 227, 180, 0.40);
+      font-size: 1.1rem;
+      overflow: hidden;
+    }
+
+    .exp-item__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .exp-item__info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .exp-item__company {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .exp-item__role {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .exp-item__role+.exp-item__role {
+      margin-top: 0.3rem;
+    }
+
+    .exp-item__role-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(233, 227, 180, 0.80);
+    }
+
+    .exp-item__date {
+      font-size: 0.78rem;
+      color: rgba(233, 227, 180, 0.50);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   </style>
 </head>
+
 <body>
 
   <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="site-header__logo" href="#home">
+      <a class="site-header__logo" href="#about">
         <img src="/images/frc_pic.JPG" alt="FRC">
-        <span>Federico RC</span>
+        <div>
+          <span>Federico Raimondi Cominesi</span>
+          <span class="site-header__subtitle">Senior Machine Learning Engineer</span>
+        </div>
       </a>
       <nav class="site-header__nav" aria-label="Main navigation">
         <a href="#home">Home</a>
@@ -471,9 +1085,12 @@
         <a href="#about">About</a>
       </nav>
       <div class="site-header__social">
-        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer" aria-label="Kaggle"><i class="fab fa-kaggle"></i></a>
+        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer"
+          aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+            class="fab fa-github"></i></a>
+        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer" aria-label="Kaggle"><i
+            class="fab fa-kaggle"></i></a>
         <a href="mailto:federico.raimondi@gsom.polimi.it" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
       <button class="btn-hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
@@ -495,28 +1112,35 @@
       <div class="hero__blob hero__blob--br"></div>
     </div>
     <div class="container hero__inner">
-      <div class="hero__badge">
+      <a class="hero__badge" href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank"
+        rel="noopener noreferrer">
         <span class="hero__badge-dot"></span>
-        Senior Machine Learning Engineer
-      </div>
+        available on LinkedIn
+      </a>
       <h1 class="hero__title">
-        Welcome, I'm Federico and I'm passionate of <em>Tennis</em>, <em>Data</em> and <em>Coding</em>... don't believe me?
+        Welcome, I'm Federico — passionate about:<br>
+        <em>Tennis</em>, <em>Data</em> and <em>Coding</em>!<br>
+        <span style="font-size:0.9em;">You don't believe me?</span>
       </h1>
-      <div class="hero__play-wrap">
-        <button class="hero__play-btn" id="open-pong" aria-label="Play Pong">
-          <i class="fas fa-play"></i>
-        </button>
-        <p class="hero__play-hint">click to play</p>
-      </div>
     </div>
   </section>
 
-  <!-- ===== Pong Overlay ===== -->
-  <div id="pong-overlay" role="dialog" aria-modal="true" aria-label="Pong game">
-    <button id="pong-close" aria-label="Close game"><i class="fas fa-times"></i></button>
-    <div id="pong-score" aria-live="polite">You: 0 &nbsp;|&nbsp; CPU: 0</div>
-    <canvas id="pong-canvas" width="700" height="400"></canvas>
-    <p id="pong-instructions">Move your mouse / touch to control the left paddle &nbsp;&middot;&nbsp; First to 7 wins!</p>
+  <!-- ===== Pong (hero-integrated) ===== -->
+  <div id="pong-section" class="pong-section" style="background:var(--bg);" aria-label="Pong game">
+    <div class="pong-section__inner">
+      <div id="pong-score" aria-live="polite"></div>
+      <div class="pong-canvas-wrap">
+        <canvas id="pong-canvas" width="560" height="320"></canvas>
+        <div class="pong-overlay-btn" id="pong-overlay-btn">
+          <button class="hero__play-btn" id="open-pong" aria-label="Play Pong">challenge me</button>
+        </div>
+        <div class="pong-result-overlay" id="pong-result-overlay" aria-live="assertive">
+          <p class="pong-result-msg" id="pong-result-msg"></p>
+          <button class="hero__play-btn" id="pong-again-btn">challenge again</button>
+        </div>
+      </div>
+      <p id="pong-instructions">Move your mouse / touch to control the left paddle &nbsp;&middot;&nbsp; Best of 1!</p>
+    </div>
   </div>
 
   <!-- ===== Projects ===== -->
@@ -531,26 +1155,30 @@
       <div class="projects-grid">
 
         <div class="project-card">
+          <a href="https://coding-drills.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"
+            aria-hidden="true">
+            <img class="project-card__img" src="images/logo_catchphare_background.png" alt="Code Drills">
+          </a>
+          <div class="project-card__body">
+            <div class="project-card__tag"><i class="fas fa-mobile-alt"></i>&nbsp; Mobile App</div>
+            <div class="project-card__title">Code Drills</div>
+            <p class="project-card__desc">A mobile app to sharpen your coding skills with daily drills and bite-sized
+              coding challenges.</p>
+            <a class="project-card__link" href="https://coding-drills.com/" target="_blank"
+              rel="noopener noreferrer">Visit site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="project-card">
           <a href="DIS24/dis24.html" tabindex="-1" aria-hidden="true">
             <img class="project-card__img" src="DIS24/img/frc_speaker_dis24.png" alt="DIS24 Conference">
           </a>
           <div class="project-card__body">
             <div class="project-card__tag"><i class="fas fa-video"></i>&nbsp; Conference</div>
             <div class="project-card__title">DIS24 Conference Presentation</div>
-            <p class="project-card__desc">Presentation delivered at the DIS24 conference on machine learning in production.</p>
-            <a class="project-card__link" href="DIS24/dis24.html">View slides <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-card__placeholder" aria-hidden="true">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__tag"><i class="fas fa-mobile-alt"></i>&nbsp; Mobile App</div>
-            <div class="project-card__title">Code Drills</div>
-            <p class="project-card__desc">A mobile app to sharpen your coding skills with daily drills and bite-sized coding challenges.</p>
-            <span class="project-card__soon">Coming soon</span>
+            <p class="project-card__desc">Presentation delivered at the DIS24 conference on machine learning in
+              production.</p>
+            <a class="project-card__link" href="DIS24/dis24.html">See video <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -559,12 +1187,8 @@
       <!-- Kaggle accordion -->
       <div class="kaggle-section-label"><i class="fab fa-kaggle"></i>&nbsp; Kaggle Challenges</div>
       <div class="kaggle-accordion" id="kaggle-accordion">
-        <div class="kaggle-accordion__header"
-             id="kaggle-header"
-             role="button"
-             tabindex="0"
-             aria-expanded="false"
-             aria-controls="kaggle-body">
+        <div class="kaggle-accordion__header" id="kaggle-header" role="button" tabindex="0" aria-expanded="false"
+          aria-controls="kaggle-body">
           <div class="kaggle-accordion__title">
             <i class="fab fa-kaggle"></i>
             Kaggle Competitions
@@ -584,8 +1208,10 @@
             <i class="fas fa-chevron-right kaggle-item__arrow" aria-hidden="true"></i>
           </a>
 
-          <a class="kaggle-item" href="kaggle_projects/Jigsaw_Unintended_Bias_in_Toxicity_Classification/jigsaw_bias.html">
-            <img class="kaggle-item__img" src="kaggle_projects/Jigsaw_Unintended_Bias_in_Toxicity_Classification/img/jigsaw.png" alt="">
+          <a class="kaggle-item"
+            href="kaggle_projects/Jigsaw_Unintended_Bias_in_Toxicity_Classification/jigsaw_bias.html">
+            <img class="kaggle-item__img"
+              src="kaggle_projects/Jigsaw_Unintended_Bias_in_Toxicity_Classification/img/jigsaw.png" alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">Jigsaw Unintended Bias in Toxicity</div>
               <div class="kaggle-item__medal"><i class="fas fa-medal"></i> Bronze Medal</div>
@@ -594,7 +1220,8 @@
           </a>
 
           <a class="kaggle-item" href="kaggle_projects/Predicting_Molecular_Properties/molecular-properties.html">
-            <img class="kaggle-item__img" src="kaggle_projects/Predicting_Molecular_Properties/img/competition.png" alt="">
+            <img class="kaggle-item__img" src="kaggle_projects/Predicting_Molecular_Properties/img/competition.png"
+              alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">Predicting Molecular Properties</div>
               <div class="kaggle-item__medal"><i class="fas fa-medal"></i> Bronze Medal</div>
@@ -602,8 +1229,10 @@
             <i class="fas fa-chevron-right kaggle-item__arrow" aria-hidden="true"></i>
           </a>
 
-          <a class="kaggle-item" href="kaggle_projects/Santander_Customer_Transaction_Prediction/santander_customer_transaction.html">
-            <img class="kaggle-item__img" src="kaggle_projects/Santander_Customer_Transaction_Prediction/Exploratory_Data_Analysis/atm.png" alt="">
+          <a class="kaggle-item"
+            href="kaggle_projects/Santander_Customer_Transaction_Prediction/santander_customer_transaction.html">
+            <img class="kaggle-item__img"
+              src="kaggle_projects/Santander_Customer_Transaction_Prediction/Exploratory_Data_Analysis/atm.png" alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">Santander Customer Transaction Prediction</div>
               <div class="kaggle-item__medal"><i class="fas fa-chart-line"></i> Analysis</div>
@@ -611,7 +1240,8 @@
             <i class="fas fa-chevron-right kaggle-item__arrow" aria-hidden="true"></i>
           </a>
 
-          <a class="kaggle-item" href="kaggle_projects/APTOS2019_Blindness_Detection/aptos2019-blindness-detection.html">
+          <a class="kaggle-item"
+            href="kaggle_projects/APTOS2019_Blindness_Detection/aptos2019-blindness-detection.html">
             <img class="kaggle-item__img" src="kaggle_projects/APTOS2019_Blindness_Detection/img/aptos.png" alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">APTOS 2019 Blindness Detection</div>
@@ -621,7 +1251,8 @@
           </a>
 
           <a class="kaggle-item" href="kaggle_projects/Kaggle_Instant_Gratification/kaggle_gratification.html">
-            <img class="kaggle-item__img" src="kaggle_projects/Kaggle_Instant_Gratification/img/instant_grat.png" alt="">
+            <img class="kaggle-item__img" src="kaggle_projects/Kaggle_Instant_Gratification/img/instant_grat.png"
+              alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">Instant Gratification Challenge</div>
               <div class="kaggle-item__medal"><i class="fas fa-medal"></i> Bronze Medal</div>
@@ -630,7 +1261,8 @@
           </a>
 
           <a class="kaggle-item" href="kaggle_projects/Capgemini_AI4Change_Hackathon/capgemini_hackathon.html">
-            <img class="kaggle-item__img" src="kaggle_projects/Capgemini_AI4Change_Hackathon/AI4Change_thumbnail.PNG" alt="">
+            <img class="kaggle-item__img" src="kaggle_projects/Capgemini_AI4Change_Hackathon/AI4Change_thumbnail.PNG"
+              alt="">
             <div class="kaggle-item__info">
               <div class="kaggle-item__name">Capgemini AI4Change Hackathon</div>
               <div class="kaggle-item__medal"><i class="fas fa-medal"></i> Bronze Medal</div>
@@ -661,7 +1293,8 @@
       </div>
       <div class="certs-grid">
 
-        <a class="cert-card" href="https://credentials.databricks.com/3512acec-326e-47f6-947b-c3e261da01f2#main-content" target="_blank" rel="noopener noreferrer">
+        <a class="cert-card" href="https://credentials.databricks.com/3512acec-326e-47f6-947b-c3e261da01f2#main-content"
+          target="_blank" rel="noopener noreferrer">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png" alt="Databricks">
           <div>
             <div class="cert-card__name">Machine Learning Professional</div>
@@ -669,7 +1302,8 @@
           </div>
         </a>
 
-        <a class="cert-card" href="https://credentials.databricks.com/1d88f501-7bd8-478a-8bb2-a343555466ff#gs.fo3r9p" target="_blank" rel="noopener noreferrer">
+        <a class="cert-card" href="https://credentials.databricks.com/1d88f501-7bd8-478a-8bb2-a343555466ff#gs.fo3r9p"
+          target="_blank" rel="noopener noreferrer">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png" alt="Databricks">
           <div>
             <div class="cert-card__name">Machine Learning Associate</div>
@@ -677,7 +1311,9 @@
           </div>
         </a>
 
-        <a class="cert-card" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4BG3JLDCJAUD" target="_blank" rel="noopener noreferrer">
+        <a class="cert-card"
+          href="https://www.coursera.org/account/accomplishments/specialization/certificate/4BG3JLDCJAUD"
+          target="_blank" rel="noopener noreferrer">
           <img src="https://www.deeplearning.ai/ai-notes/assets/images/layout/deeplearning.png" alt="deeplearning.ai">
           <div>
             <div class="cert-card__name">Deep Learning Specialization</div>
@@ -685,15 +1321,20 @@
           </div>
         </a>
 
-        <a class="cert-card" href="https://www.codecademy.com/profiles/FedeRaimondi/certificates/10893677113547f7bc2ec6d950535805" target="_blank" rel="noopener noreferrer">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxOzoTnjiXtaiywJ9HLVczLr2aACbb5S3Mew&s" alt="Codecademy">
+        <a class="cert-card"
+          href="https://www.codecademy.com/profiles/FedeRaimondi/certificates/10893677113547f7bc2ec6d950535805"
+          target="_blank" rel="noopener noreferrer">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxOzoTnjiXtaiywJ9HLVczLr2aACbb5S3Mew&s"
+            alt="Codecademy">
           <div>
             <div class="cert-card__name">Software Engineering for Data Scientists</div>
             <div class="cert-card__issuer">Codecademy</div>
           </div>
         </a>
 
-        <a class="cert-card" href="https://drive.google.com/file/d/1xAUt3lBYSeoO3mYiGyh5tPy1QDO2auT7/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+        <a class="cert-card"
+          href="https://drive.google.com/file/d/1xAUt3lBYSeoO3mYiGyh5tPy1QDO2auT7/view?usp=drive_link" target="_blank"
+          rel="noopener noreferrer">
           <img src="/assets/images/huggingface-logo.svg" alt="Hugging Face">
           <div>
             <div class="cert-card__name">Fundamentals of Agents</div>
@@ -716,7 +1357,8 @@
           <div class="section-label">About Me</div>
           <h2 class="section-title">Federico Raimondi Cominesi</h2>
           <p><strong>Senior Machine Learning Engineer</strong> passionate about data, tennis, and coding.</p>
-          <p>Extensive experience in cross-functional teams, complex organizations, and large-scale transformational programs.</p>
+          <p>Extensive experience in cross-functional teams, complex organizations, and large-scale transformational
+            programs.</p>
           <blockquote class="motto">"Learning never exhausts the mind" &ndash; Leonardo da Vinci</blockquote>
           <div class="about-social">
             <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer">
@@ -732,6 +1374,83 @@
               <i class="fas fa-envelope"></i> Email
             </a>
           </div>
+
+          <!-- Experience Accordion -->
+          <div class="exp-accordion" id="exp-accordion">
+            <div class="exp-accordion__header" id="exp-header" role="button" tabindex="0" aria-expanded="false"
+              aria-controls="exp-body">
+              <div class="exp-accordion__title">
+                <i class="fas fa-briefcase"></i>
+                Experience
+              </div>
+              <i class="fas fa-chevron-down exp-accordion__chevron" aria-hidden="true"></i>
+            </div>
+            <div class="exp-accordion__body" id="exp-body" role="region" aria-labelledby="exp-header">
+
+              <div class="exp-item">
+                <div class="exp-item__logo" title="Advanzia Bank S.A."><img src="/assets/images/advanzia.png"
+                    alt="Advanzia Bank S.A."></div>
+                <div class="exp-item__info">
+                  <div class="exp-item__company">Advanzia Bank S.A.</div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Senior Machine Learning Engineer</span>
+                    <span class="exp-item__date">May 2025 &ndash; Present</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-item__logo" title="Ferrero"><img src="/assets/images/ferrero.png" alt="Ferrero"></div>
+                <div class="exp-item__info">
+                  <div class="exp-item__company">Ferrero</div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Senior Data Scientist</span>
+                    <span class="exp-item__date">Jan 2023 &ndash; May 2025</span>
+                  </div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Data Scientist</span>
+                    <span class="exp-item__date">Jun 2020 &ndash; Dec 2022</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-item__logo" title="BIP"><img src="/assets/images/bip.png" alt="BIP"></div>
+                <div class="exp-item__info">
+                  <div class="exp-item__company">BIP</div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Data Scientist</span>
+                    <span class="exp-item__date">Apr 2019 &ndash; Feb 2020</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-item__logo" title="Capgemini"><img src="/assets/images/capgemini.png" alt="Capgemini">
+                </div>
+                <div class="exp-item__info">
+                  <div class="exp-item__company">Capgemini</div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Junior Data Scientist</span>
+                    <span class="exp-item__date">May 2018 &ndash; Apr 2019</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-item__logo" title="AUTO1 Group"><img src="/assets/images/auto1.png" alt="AUTO1 Group">
+                </div>
+                <div class="exp-item__info">
+                  <div class="exp-item__company">AUTO1 Group</div>
+                  <div class="exp-item__role">
+                    <span class="exp-item__role-name">Operations Analyst</span>
+                    <span class="exp-item__date">Apr 2017 &ndash; Sep 2017</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -740,20 +1459,54 @@
   <!-- ===== Footer ===== -->
   <footer class="site-footer">
     <div class="container">
-      <p>Federico Raimondi Cominesi &copy; 2024</p>
+      <p>Federico Raimondi Cominesi &copy; 2026</p>
       <div class="footer-social">
-        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer" aria-label="Kaggle"><i class="fab fa-kaggle"></i></a>
+        <a href="https://www.linkedin.com/in/federico-raimondi-cominesi/" target="_blank" rel="noopener noreferrer"
+          aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/FedericoRaimondi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+            class="fab fa-github"></i></a>
+        <a href="https://www.kaggle.com/raimonds1993" target="_blank" rel="noopener noreferrer" aria-label="Kaggle"><i
+            class="fab fa-kaggle"></i></a>
         <a href="mailto:federico.raimondi@gsom.polimi.it" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
+      <p style="margin-top:0.75rem; font-size:0.75rem;">
+        <a href="privacy.html" style="color:rgba(233,227,180,0.4); text-decoration:underline;">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <button onclick="resetCookieConsent()"
+          style="font-size:0.75rem; color:rgba(233,227,180,0.4); background:none; border:none; cursor:pointer; text-decoration:underline;">Cookie
+          Settings</button>
+      </p>
     </div>
   </footer>
 
   <script>
+    /* ===== Cookie consent ===== */
+    function resetCookieConsent() {
+      localStorage.removeItem('cookie_consent');
+      var banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'flex';
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      var consent = localStorage.getItem('cookie_consent');
+      if (!consent) {
+        banner.style.display = 'flex';
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.style.display = 'none';
+        if (typeof loadGA === 'function') loadGA();
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function () {
+        localStorage.setItem('cookie_consent', 'declined');
+        banner.style.display = 'none';
+      });
+    });
+
     /* ===== Mobile nav ===== */
     var hamburgerBtn = document.getElementById('hamburger-btn');
-    var mobileNav    = document.getElementById('mobile-nav');
+    var mobileNav = document.getElementById('mobile-nav');
 
     hamburgerBtn.addEventListener('click', function () {
       var open = mobileNav.classList.toggle('is-open');
@@ -767,7 +1520,7 @@
 
     /* ===== Kaggle accordion ===== */
     var kaggleAccordion = document.getElementById('kaggle-accordion');
-    var kaggleHeader    = document.getElementById('kaggle-header');
+    var kaggleHeader = document.getElementById('kaggle-header');
 
     kaggleHeader.addEventListener('click', function () {
       var open = kaggleAccordion.classList.toggle('is-open');
@@ -778,19 +1531,33 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); kaggleHeader.click(); }
     });
 
+    /* ===== Experience accordion ===== */
+    var expAccordion = document.getElementById('exp-accordion');
+    var expHeader = document.getElementById('exp-header');
+
+    expHeader.addEventListener('click', function () {
+      var open = expAccordion.classList.toggle('is-open');
+      expHeader.setAttribute('aria-expanded', open);
+    });
+
+    expHeader.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); expHeader.click(); }
+    });
+
     /* ===== Pong game ===== */
     (function () {
-      var overlay  = document.getElementById('pong-overlay');
-      var closeBtn = document.getElementById('pong-close');
-      var openBtn  = document.getElementById('open-pong');
-      var canvas   = document.getElementById('pong-canvas');
-      var ctx      = canvas.getContext('2d');
-      var scoreEl  = document.getElementById('pong-score');
+      var pongSection = document.getElementById('pong-section');
+      var openBtn = document.getElementById('open-pong');
+      var overlayBtn = document.getElementById('pong-overlay-btn');
+      var canvas = document.getElementById('pong-canvas');
+      var ctx = canvas.getContext('2d');
+      var scoreEl = document.getElementById('pong-score');
+      var gameStarted = false;
 
-      var W      = canvas.width;
-      var H      = canvas.height;
-      var PAD_W  = 12;
-      var PAD_H  = 70;
+      var W = canvas.width;
+      var H = canvas.height;
+      var PAD_W = 12;
+      var PAD_H = 70;
       var BALL_R = 8;
       var MAX_SPEED = 14;
 
@@ -812,20 +1579,20 @@
         };
       }
 
-      var raf         = null;
-      var running     = false;
+      var raf = null;
+      var running = false;
       var playerScore = 0;
-      var cpuScore    = 0;
+      var cpuScore = 0;
 
-      var player = { x: 14,              y: H / 2 - PAD_H / 2 };
-      var cpu    = { x: W - 14 - PAD_W, y: H / 2 - PAD_H / 2, speed: 3.5 };
-      var ball   = { x: W / 2, y: H / 2, vx: 4.5, vy: 3 };
+      var player = { x: 14, y: H / 2 - PAD_H / 2 };
+      var cpu = { x: W - 14 - PAD_W, y: H / 2 - PAD_H / 2, speed: 6 };
+      var ball = { x: W / 2, y: H / 2, vx: 8, vy: 5 };
 
       function resetBall(towardPlayer) {
-        ball.x  = W / 2;
-        ball.y  = H / 2;
-        ball.vx = (towardPlayer ? -1 : 1) * 4.5;
-        ball.vy = (Math.random() > 0.5 ? 1 : -1) * 3;
+        ball.x = W / 2;
+        ball.y = H / 2;
+        ball.vx = (towardPlayer ? -1 : 1) * 8;
+        ball.vy = (Math.random() > 0.5 ? 1 : -1) * 5;
       }
 
       function drawCourt() {
@@ -839,7 +1606,7 @@
         ctx.fillRect(0, H * 0.9, W, H * 0.1);
 
         ctx.strokeStyle = 'rgba(255,255,255,0.82)';
-        ctx.lineWidth   = 2;
+        ctx.lineWidth = 2;
 
         /* Outer boundary */
         ctx.strokeRect(18, 18, W - 36, H - 36);
@@ -857,7 +1624,7 @@
 
         /* Net (dashed) */
         ctx.strokeStyle = 'rgba(255,255,255,0.95)';
-        ctx.lineWidth   = 3;
+        ctx.lineWidth = 3;
         ctx.setLineDash([7, 5]);
         ctx.beginPath();
         ctx.moveTo(W / 2, 12);
@@ -873,9 +1640,9 @@
       }
 
       function drawBall() {
-        ctx.fillStyle   = '#e9e3b4';
+        ctx.fillStyle = '#e9e3b4';
         ctx.strokeStyle = '#aabd8c';
-        ctx.lineWidth   = 2;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
         ctx.fill();
@@ -884,7 +1651,7 @@
 
       function moveCPU() {
         var centre = cpu.y + PAD_H / 2;
-        if (centre < ball.y - 5)      cpu.y += cpu.speed;
+        if (centre < ball.y - 5) cpu.y += cpu.speed;
         else if (centre > ball.y + 5) cpu.y -= cpu.speed;
         cpu.y = Math.max(18, Math.min(H - 18 - PAD_H, cpu.y));
       }
@@ -895,23 +1662,30 @@
       }
 
       function updateScore() {
-        scoreEl.textContent = 'You: ' + playerScore + '  |  CPU: ' + cpuScore;
-        if (playerScore >= 7 || cpuScore >= 7) endGame();
+        scoreEl.textContent = 'You: ' + playerScore + '  |  Federico: ' + cpuScore;
+        if (playerScore >= 1 || cpuScore >= 1) endGame();
       }
+
+      var resultOverlay = document.getElementById('pong-result-overlay');
+      var resultMsg = document.getElementById('pong-result-msg');
+      var againBtn = document.getElementById('pong-again-btn');
+
+      againBtn.addEventListener('click', function () {
+        resultOverlay.classList.remove('visible');
+        canvas.style.filter = '';
+        startGame();
+      });
 
       function endGame() {
         running = false;
         cancelAnimationFrame(raf);
-        drawCourt();
-        ctx.fillStyle = 'rgba(0,0,0,0.52)';
-        ctx.fillRect(0, 0, W, H);
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#e9e3b4';
-        ctx.font      = 'bold 34px Roboto, sans-serif';
-        ctx.fillText(playerScore >= 7 ? 'You Win!' : 'CPU Wins!', W / 2, H / 2 - 18);
-        ctx.font      = '17px Roboto, sans-serif';
-        ctx.fillStyle = 'rgba(233,227,180,0.65)';
-        ctx.fillText('Click the play button to restart', W / 2, H / 2 + 20);
+        canvas.style.filter = 'blur(6px) brightness(0.55)';
+        if (playerScore >= 1) {
+          resultMsg.textContent = 'the force is strong with this one\u2026 you may contact me on LinkedIn';
+        } else {
+          resultMsg.textContent = 'gotcha! train you must\u2026 my padawan';
+        }
+        resultOverlay.classList.add('visible');
       }
 
       function step() {
@@ -921,27 +1695,27 @@
         ball.y += ball.vy;
 
         /* Top / bottom wall bounce */
-        if (ball.y - BALL_R < 18)     { ball.y = 18 + BALL_R;     ball.vy *= -1; }
+        if (ball.y - BALL_R < 18) { ball.y = 18 + BALL_R; ball.vy *= -1; }
         if (ball.y + BALL_R > H - 18) { ball.y = H - 18 - BALL_R; ball.vy *= -1; }
 
         /* Player paddle collision */
         if (ball.vx < 0 &&
-            ball.x - BALL_R < player.x + PAD_W &&
-            ball.x + BALL_R > player.x &&
-            ball.y + BALL_R > player.y &&
-            ball.y - BALL_R < player.y + PAD_H) {
-          ball.x  = player.x + PAD_W + BALL_R;
+          ball.x - BALL_R < player.x + PAD_W &&
+          ball.x + BALL_R > player.x &&
+          ball.y + BALL_R > player.y &&
+          ball.y - BALL_R < player.y + PAD_H) {
+          ball.x = player.x + PAD_W + BALL_R;
           ball.vx = Math.abs(ball.vx) * 1.05;
           ball.vy = ((ball.y - (player.y + PAD_H / 2)) / (PAD_H / 2)) * 6;
         }
 
         /* CPU paddle collision */
         if (ball.vx > 0 &&
-            ball.x + BALL_R > cpu.x &&
-            ball.x - BALL_R < cpu.x + PAD_W &&
-            ball.y + BALL_R > cpu.y &&
-            ball.y - BALL_R < cpu.y + PAD_H) {
-          ball.x  = cpu.x - BALL_R;
+          ball.x + BALL_R > cpu.x &&
+          ball.x - BALL_R < cpu.x + PAD_W &&
+          ball.y + BALL_R > cpu.y &&
+          ball.y - BALL_R < cpu.y + PAD_H) {
+          ball.x = cpu.x - BALL_R;
           ball.vx = -Math.abs(ball.vx) * 1.05;
           ball.vy = ((ball.y - (cpu.y + PAD_H / 2)) / (PAD_H / 2)) * 6;
         }
@@ -949,14 +1723,14 @@
         clampSpeed();
 
         /* Scoring */
-        if (ball.x + BALL_R < 0)  { cpuScore++;    updateScore(); resetBall(false); }
-        if (ball.x - BALL_R > W)  { playerScore++; updateScore(); resetBall(true);  }
+        if (ball.x + BALL_R < 0) { cpuScore++; updateScore(); resetBall(false); }
+        if (ball.x - BALL_R > W) { playerScore++; updateScore(); resetBall(true); }
 
         moveCPU();
 
         drawCourt();
         drawPaddle(player, '#e9e3b4');
-        drawPaddle(cpu,    '#aabd8c');
+        drawPaddle(cpu, '#aabd8c');
         drawBall();
 
         raf = requestAnimationFrame(step);
@@ -964,42 +1738,73 @@
 
       function startGame() {
         playerScore = 0; cpuScore = 0;
-        updateScore();
+        scoreEl.textContent = 'You: 0  |  Federico: 0';
         player.y = H / 2 - PAD_H / 2;
-        cpu.y    = H / 2 - PAD_H / 2;
+        cpu.y = H / 2 - PAD_H / 2;
         resetBall(false);
         running = true;
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(step);
       }
 
-      function openOverlay()  { overlay.classList.add('is-open');    startGame(); }
-      function closeOverlay() { overlay.classList.remove('is-open'); running = false; cancelAnimationFrame(raf); }
+      function openSection() {
+        if (!gameStarted) {
+          gameStarted = true;
+          canvas.classList.add('active');
+          scoreEl.classList.add('active');
+          overlayBtn.classList.add('hidden');
+        }
+        startGame();
+      }
 
-      openBtn.addEventListener('click',  openOverlay);
-      closeBtn.addEventListener('click', closeOverlay);
+      openBtn.addEventListener('click', openSection);
+
+      /* Draw court on load so canvas shows blurred preview */
+      drawCourt();
+      drawPaddle(player, '#e9e3b4');
+      drawPaddle(cpu, '#aabd8c');
+      drawBall();
 
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeOverlay();
+        if (e.key === 'Escape') {
+          running = false;
+          cancelAnimationFrame(raf);
+        }
       });
 
       /* Mouse control */
       canvas.addEventListener('mousemove', function (e) {
-        var rect   = canvas.getBoundingClientRect();
+        var rect = canvas.getBoundingClientRect();
         var scaleY = H / rect.height;
-        player.y   = (e.clientY - rect.top) * scaleY - PAD_H / 2;
-        player.y   = Math.max(18, Math.min(H - 18 - PAD_H, player.y));
+        player.y = (e.clientY - rect.top) * scaleY - PAD_H / 2;
+        player.y = Math.max(18, Math.min(H - 18 - PAD_H, player.y));
       });
 
       /* Touch control */
       canvas.addEventListener('touchmove', function (e) {
         e.preventDefault();
-        var rect   = canvas.getBoundingClientRect();
+        var rect = canvas.getBoundingClientRect();
         var scaleY = H / rect.height;
-        player.y   = (e.touches[0].clientY - rect.top) * scaleY - PAD_H / 2;
-        player.y   = Math.max(18, Math.min(H - 18 - PAD_H, player.y));
+        player.y = (e.touches[0].clientY - rect.top) * scaleY - PAD_H / 2;
+        player.y = Math.max(18, Math.min(H - 18 - PAD_H, player.y));
       }, { passive: false });
     }());
   </script>
+
+  <!-- ===== Cookie Banner ===== -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-banner-desc">
+    <p id="cookie-banner-desc" class="cookie-banner__text">
+      <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+      This site uses <strong>Google Analytics</strong> to collect anonymous usage statistics (GDPR Art. 6(1)(a)).
+      Your IP address may be processed by Google. See our
+      <a href="privacy.html">privacy policy</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept">Accept</button>
+      <button id="cookie-decline" class="cookie-banner__btn cookie-banner__btn--decline">Decline</button>
+    </div>
+  </div>
+
 </body>
+
 </html>

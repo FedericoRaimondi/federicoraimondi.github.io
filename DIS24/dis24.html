@@ -533,6 +533,13 @@
             class="fab fa-kaggle"></i></a>
         <a href="mailto:federico.raimondi@gsom.polimi.it"><i class="fas fa-envelope"></i></a>
       </div>
+      <p style="margin-top:0.75rem; font-size:0.75rem;">
+        <a href="../privacy.html" style="color:rgba(233,227,180,0.4); text-decoration:underline;">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <button onclick="resetCookieConsent()"
+          style="font-size:0.75rem; color:rgba(233,227,180,0.4); background:none; border:none; cursor:pointer; text-decoration:underline;">Cookie
+          Settings</button>
+      </p>
     </div>
   </footer>
 
@@ -566,6 +573,11 @@
         banner.style.display = 'none';
       });
     })();
+    function resetCookieConsent() {
+      localStorage.removeItem('cookie_consent');
+      var banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'flex';
+    }
 
     /* Mobile nav */
     var hamburgerBtn = document.getElementById('hamburger-btn');

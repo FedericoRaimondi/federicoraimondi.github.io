@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy – Federico Raimondi Cominesi</title>
+    <meta name="robots" content="noindex, follow" />
+    <script>
+        window._GA_ID = 'G-VYMCSFCQXW';
+        function loadGA() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._GA_ID;
+            document.head.appendChild(s);
+            s.onload = function () {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', window._GA_ID);
+            };
+        }
+        if (localStorage.getItem('cookie_consent') === 'accepted') { loadGA(); }
+    </script>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --wine: #381d2a;
+            --blue: #3e6990;
+            --green: #aabd8c;
+            --cream: #e9e3b4;
+            --olive: #373d20;
+            --bg: #f7f4ed;
+            --fg: #1e2314;
+            --bg-card: #ffffff;
+            --fg-muted: rgba(35, 40, 20, 0.65);
+            --fg-subtle: rgba(35, 40, 20, 0.38);
+            --header-bg: rgba(247, 244, 237, 0.93);
+            --border-blue: rgba(62, 105, 144, 0.22);
+            --shadow: 0 4px 20px rgba(55, 61, 32, 0.09);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: none;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        .site-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .site-header__logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--olive);
+        }
+
+        .site-header__logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .site-header__back {
+            font-size: 0.85rem;
+            color: var(--fg-muted);
+        }
+
+        .site-header__back:hover {
+            color: var(--blue);
+        }
+
+        main {
+            padding: 6rem 0 4rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+            font-weight: 700;
+        }
+
+        .last-updated {
+            color: var(--fg-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2.5rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        p {
+            font-size: 0.92rem;
+            color: var(--fg-muted);
+            line-height: 1.8;
+            margin-bottom: 0.6rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 0.6rem;
+        }
+
+        li {
+            font-size: 0.92rem;
+            color: var(--fg-muted);
+            line-height: 2;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--olive);
+        }
+
+        code {
+            background: rgba(55, 61, 32, 0.08);
+            border-radius: 4px;
+            padding: 0.1em 0.35em;
+            font-size: 0.88em;
+            color: var(--olive);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 0.75rem 0;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            background: rgba(55, 61, 32, 0.06);
+            border-bottom: 2px solid var(--border-blue);
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.5rem 0.75rem;
+            color: var(--fg-muted);
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .site-footer {
+            background: var(--olive);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 0.85rem;
+            color: rgba(233, 227, 180, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .site-footer a {
+            font-size: 0.8rem;
+            color: rgba(233, 227, 180, 0.5);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            color: var(--green);
+        }
+
+        #cookie-banner {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: rgba(30, 35, 18, 0.97);
+            border-top: 1px solid rgba(170, 189, 140, 0.25);
+            padding: 1rem 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            backdrop-filter: blur(6px);
+        }
+
+        .cookie-banner__text {
+            font-size: 0.82rem;
+            color: rgba(233, 227, 180, 0.85);
+            line-height: 1.6;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .cookie-banner__text a {
+            color: var(--green);
+        }
+
+        .cookie-banner__actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .cookie-banner__btn {
+            padding: 0.45rem 1.1rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .cookie-banner__btn:hover {
+            opacity: 0.85;
+        }
+
+        .cookie-banner__btn--accept {
+            background: #90d870;
+            color: #1a2e10;
+        }
+
+        .cookie-banner__btn--decline {
+            background: transparent;
+            color: rgba(233, 227, 180, 0.7);
+            border: 1px solid rgba(233, 227, 180, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-header__logo" href="index.html">
+                <img src="/images/frc_pic.JPG" alt="FRC">
+                <span>Federico Raimondi Cominesi</span>
+            </a>
+            <a class="site-header__back" href="index.html">
+                <i class="fas fa-arrow-left"></i> back
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last updated: April 9, 2026</p>
+
+            <section>
+                <h2>1. Who we are</h2>
+                <p>This website is operated by Federico Raimondi Cominesi. For any questions about this policy, contact
+                    us at
+                    <a href="mailto:federico.raimondi@gsom.polimi.it">federico.raimondi@gsom.polimi.it</a>.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. What data we collect and why</h2>
+                <p>We use <strong>Google Analytics 4 (GA4)</strong> to understand how visitors interact with this site.
+                    This is
+                    only activated after you give explicit consent via the cookie banner. GA4 may collect:</p>
+                <ul>
+                    <li>Pages visited and time spent</li>
+                    <li>Approximate geographic location (country / city, derived from IP)</li>
+                    <li>Device type, browser, and operating system</li>
+                    <li>Referring website</li>
+                </ul>
+                <p>Your IP address is sent to Google's servers but is anonymised before storage. We do not collect
+                    names, email
+                    addresses, or any data that directly identifies you.</p>
+            </section>
+
+            <section>
+                <h2>3. Legal basis (GDPR)</h2>
+                <p>We process analytics data on the basis of your <strong>consent</strong> (GDPR Article 6(1)(a)). You
+                    can
+                    withdraw consent at any time (see section 5).</p>
+            </section>
+
+            <section>
+                <h2>4. Data retention and third parties</h2>
+                <p>Analytics data is retained for <strong>14 months</strong> in Google Analytics. Google LLC acts as a
+                    data
+                    processor under Google's Data Processing Terms. For more information see
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's
+                        Privacy
+                        Policy</a>.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Your rights and how to withdraw consent</h2>
+                <p>You have the right to access, rectify, or erase your data, and to object to or restrict processing.
+                    Because
+                    the data collected via GA4 is anonymous and not linked to your identity, we are unable to retrieve
+                    or delete
+                    records for a specific person.</p>
+                <p>To <strong>withdraw your analytics consent</strong>, return to this page's footer and click
+                    <strong>cookie settings</strong>. Choosing "Decline" will immediately stop further GA4 data
+                    collection.
+                </p>
+                <p>To exercise other GDPR rights, contact us at
+                    <a href="mailto:federico.raimondi@gsom.polimi.it">federico.raimondi@gsom.polimi.it</a>.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Cookies used</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Expiry</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>_ga</code></td>
+                            <td>Distinguishes unique users (Google Analytics)</td>
+                            <td>2 years</td>
+                        </tr>
+                        <tr>
+                            <td><code>_ga_*</code></td>
+                            <td>Persists session state (Google Analytics)</td>
+                            <td>2 years</td>
+                        </tr>
+                        <tr>
+                            <td><code>cookie_consent</code></td>
+                            <td>Remembers your cookie preference (first-party)</td>
+                            <td>localStorage (persistent)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Analytics cookies are only set if you accept via the consent banner.</p>
+            </section>
+
+            <section>
+                <h2>7. Changes to this policy</h2>
+                <p>We may update this policy occasionally. The "last updated" date at the top of the page will reflect
+                    any
+                    changes.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Federico Raimondi Cominesi &copy; 2026</p>
+            <a href="index.html">&larr; back to home</a>
+            &nbsp;&middot;&nbsp;
+            <button onclick="resetCookieConsent()"
+                style="font-size:0.8rem; color:rgba(233,227,180,0.5); background:none; border:none; cursor:pointer; text-decoration:underline;">cookie
+                settings</button>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-banner-desc">
+        <p id="cookie-banner-desc" class="cookie-banner__text">
+            <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+            This site uses <strong>Google Analytics</strong> to collect anonymous usage statistics (GDPR
+            Art.&#160;6(1)(a)).
+        </p>
+        <div class="cookie-banner__actions">
+            <button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept">Accept</button>
+            <button id="cookie-decline" class="cookie-banner__btn cookie-banner__btn--decline">Decline</button>
+        </div>
+    </div>
+
+    <script>
+        function resetCookieConsent() {
+            localStorage.removeItem('cookie_consent');
+            document.getElementById('cookie-banner').style.display = 'flex';
+        }
+        (function () {
+            var banner = document.getElementById('cookie-banner');
+            if (!banner) return;
+            if (!localStorage.getItem('cookie_consent')) { banner.style.display = 'flex'; }
+            document.getElementById('cookie-accept').addEventListener('click', function () {
+                localStorage.setItem('cookie_consent', 'accepted');
+                banner.style.display = 'none';
+                if (typeof loadGA === 'function') loadGA();
+            });
+            document.getElementById('cookie-decline').addEventListener('click', function () {
+                localStorage.setItem('cookie_consent', 'declined');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+</body>
+
+</html>

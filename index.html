@@ -9,7 +9,10 @@
   <title>Federico Raimondi Cominesi</title>
   <script>
     window._GA_ID = 'G-VYMCSFCQXW';
+    window._GA_LOADED = false;
     function loadGA() {
+      if (localStorage.getItem('cookie_consent') !== 'accepted' || window._GA_LOADED) { return; }
+      window._GA_LOADED = true;
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._GA_ID;

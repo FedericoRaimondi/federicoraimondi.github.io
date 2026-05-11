@@ -4,26 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APTOS 2019 Blindness Detection – Federico Raimondi Cominesi</title>
-  <script>
+    <script>
     window._GA_ID = 'G-V5F316VD73';
-    window._GA_LOADED = false;
-    function loadGA() {
-      if (localStorage.getItem('cookie_consent') !== 'accepted' || window._GA_LOADED) { return; }
-      window._GA_LOADED = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window._GA_ID;
-      document.head.appendChild(s);
-      s.onload = function () {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', window._GA_ID);
+    window._CONSENT_REGIONS = [
+      'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IS', 'IE', 'IT',
+      'LV', 'LI', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH'
+    ];
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = window.gtag || gtag;
+
+    function getConsentUpdate(consentValue) {
+      var granted = consentValue === 'accepted' ? 'granted' : 'denied';
+      return {
+        ad_storage: granted,
+        ad_user_data: granted,
+        ad_personalization: granted,
+        analytics_storage: granted
       };
     }
-    if (localStorage.getItem('cookie_consent') === 'accepted') { loadGA(); }
+
+    function applyConsentMode(consentValue) {
+      gtag('consent', 'update', getConsentUpdate(consentValue));
+    }
+
+    gtag('consent', 'default', Object.assign({
+      wait_for_update: 500,
+      region: window._CONSENT_REGIONS
+    }, getConsentUpdate('declined')));
+
+    var storedConsent = localStorage.getItem('cookie_consent');
+    if (storedConsent === 'accepted' || storedConsent === 'declined') {
+      applyConsentMode(storedConsent);
+    }
+
+    gtag('js', new Date());
+    gtag('config', window._GA_ID, { anonymize_ip: true });
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5F316VD73"></script>
   <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -272,16 +290,18 @@
       if (!localStorage.getItem('cookie_consent')) { banner.style.display = 'flex'; }
       document.getElementById('cookie-accept').addEventListener('click', function () {
         localStorage.setItem('cookie_consent', 'accepted');
+        if (typeof applyConsentMode === 'function') { applyConsentMode('accepted'); }
         banner.style.display = 'none';
-        if (typeof loadGA === 'function') loadGA();
       });
       document.getElementById('cookie-decline').addEventListener('click', function () {
         localStorage.setItem('cookie_consent', 'declined');
+        if (typeof applyConsentMode === 'function') { applyConsentMode('declined'); }
         banner.style.display = 'none';
       });
     })();
     function resetCookieConsent() {
       localStorage.removeItem('cookie_consent');
+      if (typeof applyConsentMode === 'function') { applyConsentMode('declined'); }
       var banner = document.getElementById('cookie-banner');
       if (banner) banner.style.display = 'flex';
     }
